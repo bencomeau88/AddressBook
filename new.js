@@ -22,16 +22,6 @@ Contact.prototype.display = function() {
     var elementSection = [contactElement, $section];
     return elementSection;
 }
-//shows above "info" when clicked, should not be a prototype?
-Contact.prototype.showInfo = function(){
-        var $contactElement = $('.contact');
-        $contactElement.on('click', function(e){
-            e.preventDefault;
-            //$('#person') is just another name for the info from Contact.display();
-            $contactInfo.show();
-            // return uniqueId;
-        })
-    }
 
 //array to load new Contact() into
 var AddressBook = function(){
@@ -59,9 +49,11 @@ var addressBook = new AddressBook();
 
 //main code
 $(document).ready(function() {
+
 //variables
   var $contactInfo = $('#contactInfo');
   var $submit = $('#submit');
+
 //on form 'submit' store values using above functions()
     $contactInfo.on('submit', function(e){
     e.preventDefault();
@@ -72,11 +64,20 @@ $(document).ready(function() {
     var eMail = $('#eMail').val();
     var contact = new Contact(firstName, lastName, address, phoneNumber, eMail)
     addressBook.add(contact);
-    contact.showInfo();
     clear();
 
   })
-    
+    //if there is a click on an <a> element then....
+    $('#contacts').on('click', 'a', function(){
+       $(this).next().show();
+       $(this).hide();
+    })
+
+    //if there is a click on the <section> then....
+    $('#contacts').on('click', 'section', function(){
+        $(this).prev().show();
+        $(this).hide();
+    })
 
 })
 //end of code
