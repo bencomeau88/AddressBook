@@ -12,9 +12,9 @@ var Contact = function(firstName, lastName, address, phoneNumber, eMail) {
 
 //show this.firstName as an anchor tag...this anchor tag is supposed to display info when clicked(see showInfo();)
 Contact.prototype.display = function() {
-    var contactElement = $('<a class="contact" id="contact" href="#">'+this.firstName+'</a>');
+    var contactElement = $('<a class="contact" href="#">'+this.firstName+'</a>');
     //use eMail to uniquely identify each person?...better way? EMAIL IS NOT A VALID ID 
-    var $section = $('<section id="person'+this.eMail+'">'+'</section>')
+    var $section = $('<section></section>')
     //should I make info a array?...how?
     $section.append('<p>'+this.firstName+' '+this.lastName+'</p>' + '<p>'+this.address+'</p>'+'<p>'+this.phoneNumber+'</p>'+'<p>'+this.eMail+'</p>');
     $section.hide();
@@ -25,11 +25,10 @@ Contact.prototype.display = function() {
 //shows above "info" when clicked, should not be a prototype?
 Contact.prototype.showInfo = function(){
         var $contactElement = $('.contact');
-        var $uniqueId = $('#person'+this.eMail);
         $contactElement.on('click', function(e){
             e.preventDefault;
             //$('#person') is just another name for the info from Contact.display();
-            $uniqueId.show();
+            $contactInfo.show();
             // return uniqueId;
         })
     }
